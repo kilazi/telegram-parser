@@ -1,0 +1,25 @@
+<h2>Chat: {{chat_id}}</h2>
+<div class="hud">
+    <div class="control-container">
+        <div class="input-container">
+            <span>date stop</span>
+            <input type="date" [(ngModel)]="dateTo">
+        </div>
+        <button (click)="fetch()">fetch</button>
+    </div>
+    <div class="control-container">
+        <input type="text" [(ngModel)]="translateTo">
+        <button (click)="translate()">translate</button>
+    </div>
+</div>
+<div class="results" *ngIf="results.count">
+    <div>iteration limit: {{limit}}</div>
+    <div>fetched messages: {{results.count}}</div>
+    <div>last message date: {{fetchedMessages[fetchedMessages.length-1].date * 1000 | date}}</div>
+</div>
+<div class="chat" *ngIf="data && data.messages">
+    <div class="message" *ngFor="let msg of data.messages">
+        <div class="date">{{(msg.date * 1000) | date: 'full'}}</div>
+        <div class="message">{{msg.message}}</div>
+    </div>
+</div>

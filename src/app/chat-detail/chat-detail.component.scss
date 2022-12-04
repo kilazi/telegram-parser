@@ -1,0 +1,13 @@
+.chat {
+    position: fixed;
+    top: 0;
+    right: 0;
+    max-width: 30vw;
+    height: 100vh;
+    overflow-y: scroll;
+    .message {
+        padding-bottom: 4px;
+        margin-bottom: 4px;
+        border-bottom: 1px solid lightgray;
+    }
+}

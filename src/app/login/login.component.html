@@ -1,0 +1,10 @@
+<input type="text" placeholder="number" [(ngModel)]="number">
+<button (click)="sendCode()">send code</button>
+
+<input type="text" placeholder="code" [(ngModel)]="code">
+<button (click)="approveCode()">send</button>
+
+<div class="mfa" *ngIf="mfa">
+    <input type="password" placeholder="password" [(ngModel)]="password">
+    <button (click)="sendPassword()">send</button>
+</div>

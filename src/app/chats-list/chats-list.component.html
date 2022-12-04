@@ -1,0 +1,6 @@
+<h2>chats</h2>
+<div class="container">
+    <div class="chat" *ngFor="let item of data" (click)="goChannel(item)">
+        {{item.title}} <span>{{item.access_hash}}</span>
+    </div>
+</div>
