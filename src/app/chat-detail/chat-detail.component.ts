@@ -16,7 +16,7 @@ export class ChatDetailComponent implements OnInit {
   access_hash;
   data: any;
   usersMap = {};
-  
+
 
   dateTo;
   translateTo = 'en';
@@ -42,8 +42,6 @@ export class ChatDetailComponent implements OnInit {
 
   async init() {
     this.data = await this.getChatHistory();
-    
-
   }
 
   async translateChat() {
@@ -54,22 +52,24 @@ export class ChatDetailComponent implements OnInit {
 
   translateBulk(messages: any[]) {
     return new Promise((resolve, reject) => {
-      let escaped = JSON.parse(JSON.stringify(messages))
-      let translatedCount = 0;
-      escaped.forEach(async (msgObj, i) => {
-        // if (i <= 3) {
-        this.translator.translate(msgObj.message).subscribe((res: any) => {
-          msgObj.message = res.data.translations[0].translatedText;
-          console.log('translated', res, translatedCount);
-          translatedCount++;
-          if (translatedCount == messages.length - 1) {
-            resolve(escaped)
-          }
-        }, err => {
-          reject(err)
+      if (messages.length > 100) alert('Please unlock full version to translate this much!')
+      else {
+        let escaped = JSON.parse(JSON.stringify(messages))
+        let translatedCount = 0;
+        escaped.forEach(async (msgObj, i) => {
+          // if (i <= 3) {
+          this.translator.translate(msgObj.message, this.translateTo).subscribe((res: any) => {
+            msgObj.message = res.data.translations[0].translatedText;
+            translatedCount++;
+            if (translatedCount == messages.length - 1) {
+              resolve(escaped)
+            }
+          }, err => {
+            reject(err)
+          })
+          // }
         })
-        // }
-      })
+      }
     })
   }
 

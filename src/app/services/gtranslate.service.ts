@@ -11,7 +11,7 @@ export class GtranslateService {
     private http: HttpClient
   ) { }
 
-  translate(query) {
-    return this.http.post('https://translation.googleapis.com/language/translate/v2?key=' + environment.gapi, {q: query, target: 'en'});
+  translate(query, destinationLanguage) {
+    return this.http.post('https://translation.googleapis.com/language/translate/v2?key=' + environment.gapi, {q: query, target: destinationLanguage});
   }
 }
